@@ -1,22 +1,8 @@
-import { useState } from 'react';
-import { ProductFiltersContainer } from './styles/ProductFiltersContainer.styled';
 import ListGroup from 'react-bootstrap/ListGroup';
-import productCategoriesData from '../mocks/en-us/product-categories.json';
+import PropTypes from 'prop-types';
+import { ProductFiltersContainer } from './styles/ProductFiltersContainer.styled';
 
-const ProductFilters = () => {
-  const [productCategories, setProductCategories] = useState(() => {
-    return productCategoriesData.results.map((category) => ({
-      ...category,
-      active: false,
-    }));
-  });
-
-  const toggleCategory = (id) => {
-    const modifiedCategories = productCategories.map((category) =>
-      category.id === id ? { ...category, active: !category.active } : category
-    );
-    setProductCategories(modifiedCategories);
-  };
+const ProductFilters = ({ toggleCategory, productCategories }) => {
   return (
     <ProductFiltersContainer>
       <ListGroup as="div">
@@ -35,6 +21,11 @@ const ProductFilters = () => {
       </ListGroup>
     </ProductFiltersContainer>
   );
+};
+
+ProductFilters.propTypes = {
+  toggleCategory: PropTypes.func,
+  productCategories: PropTypes.array,
 };
 
 export default ProductFilters;
