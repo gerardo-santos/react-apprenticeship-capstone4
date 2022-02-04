@@ -1,9 +1,9 @@
+import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
 import { StyledCard } from './styles/Card.styled';
 import { CardImage } from './styles/CardImage.styled';
 import { CardTitle } from './styles/CardTitle.styled';
 import { ProductCardDetails } from './styles/ProductCardDetails.styled';
-import Button from 'react-bootstrap/Button';
-import PropTypes from 'prop-types';
 
 const ProductCard = ({
   name,
@@ -11,16 +11,16 @@ const ProductCard = ({
   price,
   category,
   buttonText,
-  productListPage,
+  isProduct,
 }) => {
   return (
     <StyledCard>
       <CardImage src={image} />
       <CardTitle>{name}</CardTitle>
-      {productListPage && (
+      {isProduct && (
         <ProductCardDetails>
-          <h4>{category}</h4>
-          <h5>$ {price}</h5>
+          <h5>{category}</h5>
+          <h6>$ {price}</h6>
         </ProductCardDetails>
       )}
       <Button>{buttonText}</Button>
@@ -34,6 +34,6 @@ ProductCard.propTypes = {
   price: PropTypes.number,
   category: PropTypes.string,
   buttonText: PropTypes.string,
-  productListPage: PropTypes.bool,
+  isProduct: PropTypes.bool,
 };
 export default ProductCard;

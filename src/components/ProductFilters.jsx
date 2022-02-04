@@ -1,5 +1,5 @@
-import ListGroup from 'react-bootstrap/ListGroup';
 import PropTypes from 'prop-types';
+import ListGroup from 'react-bootstrap/ListGroup';
 import { ProductFiltersContainer } from './styles/ProductFiltersContainer.styled';
 
 const ProductFilters = ({ toggleCategory, productCategories }) => {
@@ -18,6 +18,9 @@ const ProductFilters = ({ toggleCategory, productCategories }) => {
             {category.data.name}
           </ListGroup.Item>
         ))}
+        <ListGroup.Item variant="primary" as="button" action>
+          Clear filters
+        </ListGroup.Item>
       </ListGroup>
     </ProductFiltersContainer>
   );

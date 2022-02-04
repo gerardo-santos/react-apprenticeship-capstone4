@@ -5,8 +5,8 @@ import PaginationButtons from '../components/PaginationButtons';
 import { PageContainer } from '../components/styles/PageContainer.styled';
 import { SectionTitle } from '../components/styles/SectionTitle.styled';
 import { ProductListSection } from '../components/styles/ProductListSection.styled';
-import productCategoriesData from '../mocks/en-us/product-categories.json';
 import productsData from '../mocks/en-us/products.json';
+import productCategoriesData from '../mocks/en-us/product-categories.json';
 
 const ProductList = () => {
   const [productCategories, setProductCategories] = useState(() => {

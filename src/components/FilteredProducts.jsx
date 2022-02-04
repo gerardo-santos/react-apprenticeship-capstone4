@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
-import { FilteredProductsContainer } from './styles/FilteredProductsContainer.styled';
 import ProductCard from '../components/ProductCard';
-import PropTypes from 'prop-types';
+import { FilteredProductsContainer } from './styles/FilteredProductsContainer.styled';
 
 const FilteredProducts = ({ filteredProducts }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,8 +29,8 @@ const FilteredProducts = ({ filteredProducts }) => {
             image={product.data.mainimage.url}
             price={product.data.price}
             category={product.data.category.slug}
-            buttonText="Go to product"
-            productListPage={true}
+            buttonText="Add to cart"
+            isProduct={true}
           />
         ))
       ) : (

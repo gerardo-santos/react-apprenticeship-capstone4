@@ -1,22 +1,34 @@
-import featuredProductsData from '../mocks/en-us/featured-products.json';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import Spinner from 'react-bootstrap/Spinner';
+import ProductCard from './ProductCard';
+import { useFeaturedProducts } from '../utils/hooks/useFeaturedProducts';
+import { SpinnerContainer } from './styles/SpinnerContainer.styled';
 import { SectionTitle } from './styles/SectionTitle.styled';
 import { CardContainer } from './styles/CardContainer.styled';
-import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import ProductCard from './ProductCard';
 
 const FeaturedProducts = () => {
-  const featuredProducts = featuredProductsData.results;
+  const { data: featuredProductsData, isLoading } = useFeaturedProducts();
+  if (isLoading) {
+    return (
+      <SpinnerContainer>
+        <Spinner animation="border" variant="danger" />
+      </SpinnerContainer>
+    );
+  }
   return (
     <section>
       <SectionTitle>Featured Products</SectionTitle>
       <CardContainer>
-        {featuredProducts.map((featuredProduct) => (
+        {featuredProductsData.results.map((featuredProduct) => (
           <ProductCard
             key={featuredProduct.id}
             name={featuredProduct.data.name}
             image={featuredProduct.data.mainimage.url}
-            buttonText="Go to product"
+            buttonText="Add to cart"
+            price={featuredProduct.data.price}
+            category={featuredProduct.data.category.slug}
+            isProduct={true}
           />
         ))}
       </CardContainer>
