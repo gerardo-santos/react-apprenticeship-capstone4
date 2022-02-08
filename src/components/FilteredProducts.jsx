@@ -26,6 +26,7 @@ const FilteredProducts = ({ filteredProducts }) => {
           <ProductCard
             key={product.id}
             name={product.data.name}
+            url={`product/${product.id}`}
             image={product.data.mainimage.url}
             price={product.data.price}
             category={product.data.category.slug}
