@@ -23,6 +23,7 @@ const FeaturedProducts = () => {
         {featuredProductsData.results.map((featuredProduct) => (
           <ProductCard
             key={featuredProduct.id}
+            url={`product/${featuredProduct.id}`}
             name={featuredProduct.data.name}
             image={featuredProduct.data.mainimage.url}
             buttonText="Add to cart"
