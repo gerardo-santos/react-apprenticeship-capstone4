@@ -29,7 +29,10 @@ export function useProductCategories() {
           }
         );
         const data = await response.json();
-
+        data.results = data.results.map((category) => ({
+          ...category,
+          active: false,
+        }));
         setProductCategories({ data, isLoading: false });
       } catch (err) {
         setProductCategories({ data: {}, isLoading: false });

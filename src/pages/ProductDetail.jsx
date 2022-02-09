@@ -15,7 +15,6 @@ const ProductDetail = () => {
   const { data: productDetailData, isLoading } = useProductDetail(id);
   const productDetails =
     productDetailData.results && productDetailData.results[0];
-  console.log(productDetails);
 
   if (isLoading) {
     return (

@@ -2,7 +2,11 @@ import PropTypes from 'prop-types';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { ProductFiltersContainer } from './styles/ProductFiltersContainer.styled';
 
-const ProductFilters = ({ toggleCategory, productCategories }) => {
+const ProductFilters = ({
+  toggleCategory,
+  productCategories,
+  clearAllFilters,
+}) => {
   return (
     <ProductFiltersContainer>
       <ListGroup as="div">
@@ -18,7 +22,12 @@ const ProductFilters = ({ toggleCategory, productCategories }) => {
             {category.data.name}
           </ListGroup.Item>
         ))}
-        <ListGroup.Item variant="primary" as="button" action>
+        <ListGroup.Item
+          variant="primary"
+          as="button"
+          action
+          onClick={clearAllFilters}
+        >
           Clear filters
         </ListGroup.Item>
       </ListGroup>
@@ -29,6 +38,7 @@ const ProductFilters = ({ toggleCategory, productCategories }) => {
 ProductFilters.propTypes = {
   toggleCategory: PropTypes.func,
   productCategories: PropTypes.array,
+  clearAllFilters: PropTypes.func,
 };
 
 export default ProductFilters;

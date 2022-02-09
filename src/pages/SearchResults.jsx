@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import Spinner from 'react-bootstrap/Spinner';
+import Alert from 'react-bootstrap/Alert';
 import { useSearchProducts } from '../utils/hooks/useSearchProducts';
 import ProductCard from '../components/ProductCard';
 import { CardContainer } from '../components/styles/CardContainer.styled';
@@ -22,17 +23,22 @@ const SearchResults = () => {
     <PageContainer>
       <SectionTitle>Search results</SectionTitle>
       <CardContainer>
-        {searchData.results.map((featuredProduct) => (
-          <ProductCard
-            key={featuredProduct.id}
-            name={featuredProduct.data.name}
-            image={featuredProduct.data.mainimage.url}
-            buttonText="Add to cart"
-            price={featuredProduct.data.price}
-            category={featuredProduct.data.category.slug}
-            isProduct={true}
-          />
-        ))}
+        {searchData.results.length > 0 ? (
+          searchData.results.map((featuredProduct) => (
+            <ProductCard
+              key={featuredProduct.id}
+              name={featuredProduct.data.name}
+              url={`../product/${featuredProduct.id}`}
+              image={featuredProduct.data.mainimage.url}
+              buttonText="Add to cart"
+              price={featuredProduct.data.price}
+              category={featuredProduct.data.category.slug}
+              isProduct={true}
+            />
+          ))
+        ) : (
+          <Alert>There are no results. Please search again.</Alert>
+        )}
       </CardContainer>
     </PageContainer>
   );

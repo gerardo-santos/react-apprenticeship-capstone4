@@ -1,24 +1,10 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
-import Spinner from 'react-bootstrap/Spinner';
+
 import Alert from 'react-bootstrap/Alert';
 import ProductCard from '../components/ProductCard';
 import { FilteredProductsContainer } from './styles/FilteredProductsContainer.styled';
 
 const FilteredProducts = ({ filteredProducts }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 2000);
-
-  if (isLoading) {
-    return (
-      <div style={{ marginLeft: '10%', marginTop: '20%' }}>
-        <h1>Loading...</h1>;
-        <Spinner animation="border" variant="danger" />
-      </div>
-    );
-  }
   return (
     <FilteredProductsContainer>
       {filteredProducts.length > 0 ? (
@@ -26,7 +12,7 @@ const FilteredProducts = ({ filteredProducts }) => {
           <ProductCard
             key={product.id}
             name={product.data.name}
-            url={`product/${product.id}`}
+            url={`../product/${product.id}`}
             image={product.data.mainimage.url}
             price={product.data.price}
             category={product.data.category.slug}

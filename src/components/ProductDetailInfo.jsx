@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import ProductTable from './ProductTable';
 
 const ProductDetailInfo = ({ productDetails }) => {
-  console.log(productDetails);
   return (
     <div>
       <h4>Price: ${productDetails.data.price}</h4>
