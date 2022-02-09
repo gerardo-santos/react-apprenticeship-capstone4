@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, createSearchParams } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import { useProductCategories } from '../utils/hooks/useProductCategories';
 import { useAllProducts } from '../utils/hooks/useAllProducts';
+import { GlobalContext } from '../context/GlobalContext';
 import FilteredProducts from '../components/FilteredProducts';
 import ProductFilters from '../components/ProductFilters';
 import PaginationButtons from '../components/PaginationButtons';
@@ -12,13 +13,14 @@ import { ProductListSection } from '../components/styles/ProductListSection.styl
 import { SpinnerContainer } from '../components/styles/SpinnerContainer.styled';
 
 const ProductList = () => {
+  const { selectedCategory } = useContext(GlobalContext);
   const navigate = useNavigate();
 
   const { data: allProductsData, isLoading: productsAreLoading } =
     useAllProducts();
 
   const { data: categoriesData, isLoading: categoriesAreLoading } =
-    useProductCategories();
+    useProductCategories(selectedCategory);
 
   const [filteredProducts, setFilteredProducts] = useState([]);
 

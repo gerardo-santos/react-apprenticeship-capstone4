@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { API_BASE_URL } from '../constants';
 import { useLatestAPI } from './useLatestAPI';
 
-export function useProductCategories() {
+export function useProductCategories(cid) {
   const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
   const [productCategories, setProductCategories] = useState(() => ({
     data: {},
@@ -29,10 +29,11 @@ export function useProductCategories() {
           }
         );
         const data = await response.json();
-        data.results = data.results.map((category) => ({
-          ...category,
-          active: false,
-        }));
+        data.results = data.results.map((category) =>
+          category.id === cid
+            ? { ...category, active: true }
+            : { ...category, active: false }
+        );
         setProductCategories({ data, isLoading: false });
       } catch (err) {
         setProductCategories({ data: {}, isLoading: false });

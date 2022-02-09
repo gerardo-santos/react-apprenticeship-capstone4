@@ -9,7 +9,7 @@ const initialDefaultState = {
   query: '',
   search: '',
   cart: [],
-  categories: [],
+  selectedCategory: '',
 };
 
 export const GlobalProvider = ({ children }) => {
