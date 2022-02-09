@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { useContext } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
 import Spinner from 'react-bootstrap/Spinner';
 import ProductCard from './ProductCard';
 import { useFeaturedProducts } from '../utils/hooks/useFeaturedProducts';
@@ -9,6 +11,7 @@ import { CardContainer } from './styles/CardContainer.styled';
 
 const FeaturedProducts = () => {
   const { data: featuredProductsData, isLoading } = useFeaturedProducts();
+  const { dispatch } = useContext(GlobalContext);
   if (isLoading) {
     return (
       <SpinnerContainer>
@@ -16,6 +19,10 @@ const FeaturedProducts = () => {
       </SpinnerContainer>
     );
   }
+  const handleClick = () => {
+    dispatch({ type: 'FILTER_BY_CATEGORY', payload: '' });
+  };
+
   return (
     <section>
       <SectionTitle>Featured Products</SectionTitle>
@@ -38,6 +45,7 @@ const FeaturedProducts = () => {
         style={{ marginLeft: '15px', marginBlock: '15px' }}
         as={Link}
         to="/products"
+        onClick={handleClick}
       >
         View all products
       </Button>
