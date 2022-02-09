@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import { useProductCategories } from '../utils/hooks/useProductCategories';
 import { useAllProducts } from '../utils/hooks/useAllProducts';
@@ -11,6 +12,8 @@ import { ProductListSection } from '../components/styles/ProductListSection.styl
 import { SpinnerContainer } from '../components/styles/SpinnerContainer.styled';
 
 const ProductList = () => {
+  const navigate = useNavigate();
+
   const { data: allProductsData, isLoading: productsAreLoading } =
     useAllProducts();
 
@@ -52,13 +55,20 @@ const ProductList = () => {
 
   useEffect(() => {
     const activeCategoriesIds = getActiveCategories();
+
     if (activeCategoriesIds.length === 0) {
       setFilteredProducts(
         allProductsData.results ? [...allProductsData.results] : []
       );
+      navigate('/products');
       return;
     }
     filterProducts(activeCategoriesIds);
+    const params = { category: activeCategoriesIds };
+    navigate({
+      pathname: '/products',
+      search: `?${createSearchParams(params)}`,
+    });
   }, [productCategories]);
 
   useEffect(() => {

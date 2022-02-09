@@ -37,7 +37,7 @@ const FeaturedProducts = () => {
         variant="danger"
         style={{ marginLeft: '15px', marginBlock: '15px' }}
         as={Link}
-        to="/product-list"
+        to="/products"
       >
         View all products
       </Button>

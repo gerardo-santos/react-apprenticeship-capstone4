@@ -21,7 +21,7 @@ const ProductCategories = () => {
         {categoriesData.results.map((productCategory) => (
           <ProductCard
             key={productCategory.id}
-            url={productCategory.id}
+            url={`/products`}
             name={productCategory.data.name}
             image={productCategory.data.main_image.url}
             buttonText="Go to category"

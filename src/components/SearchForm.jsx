@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 import { useContext } from 'react';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
@@ -12,7 +12,11 @@ const SearchForm = () => {
     e.preventDefault();
     if (!query) return;
     dispatch({ type: 'GET_SEARCH', payload: query });
-    navigate('/search-results');
+    const params = { q: query };
+    navigate({
+      pathname: '/search',
+      search: `?${createSearchParams(params)}`,
+    });
   };
   return (
     <Form className="d-flex" onSubmit={handleSubmit}>
