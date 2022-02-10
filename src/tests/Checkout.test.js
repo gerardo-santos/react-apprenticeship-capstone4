@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalContext';
-import NavBar from '../components/NavBar';
+import Checkout from '../pages/Checkout';
 
-describe('NavBar', () => {
+describe('Checkout', () => {
   const initialDefaultState = {
     query: '',
     search: '',
@@ -11,19 +11,16 @@ describe('NavBar', () => {
     selectedCategory: '',
   };
 
-  test('renders the NavBar component', () => {
+  test('renders the Checkout component', () => {
     render(
       <GlobalContext.Provider value={initialDefaultState}>
         <BrowserRouter>
-          <NavBar />
+          <Checkout />
         </BrowserRouter>
       </GlobalContext.Provider>
     );
 
-    const brandText = 'My Shop';
-    expect(screen.getByText(brandText)).toBeInTheDocument();
-
-    const logoImage = screen.getByRole('img');
-    expect(logoImage).toBeInTheDocument();
+    expect(screen.getByRole('heading')).toBeInTheDocument();
+    expect(screen.getByRole('heading')).toHaveTextContent('Checkout');
   });
 });
