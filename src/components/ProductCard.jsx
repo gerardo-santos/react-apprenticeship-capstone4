@@ -24,7 +24,11 @@ const ProductCard = ({
     dispatch({ type: 'FILTER_BY_CATEGORY', payload: id });
   };
   return (
-    <Link to={url} style={{ textDecoration: 'none', color: '#fefefe' }}>
+    <Link
+      to={url}
+      style={{ textDecoration: 'none', color: '#fefefe' }}
+      onClick={handleClick}
+    >
       <StyledCard>
         <CardImage src={image} />
         <CardTitle>{name}</CardTitle>
@@ -34,7 +38,7 @@ const ProductCard = ({
             <h6>$ {price}</h6>
           </ProductCardDetails>
         )}
-        <Button onClick={handleClick}>{buttonText}</Button>
+        <Button>{buttonText}</Button>
       </StyledCard>
     </Link>
   );
