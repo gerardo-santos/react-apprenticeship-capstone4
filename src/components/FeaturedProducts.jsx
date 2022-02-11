@@ -1,22 +1,42 @@
-import featuredProductsData from '../mocks/en-us/featured-products.json';
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import { useContext } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
+import Spinner from 'react-bootstrap/Spinner';
+import ProductCard from './ProductCard';
+import { useFeaturedProducts } from '../utils/hooks/useFeaturedProducts';
+import { SpinnerContainer } from './styles/SpinnerContainer.styled';
 import { SectionTitle } from './styles/SectionTitle.styled';
 import { CardContainer } from './styles/CardContainer.styled';
-import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import ProductCard from './ProductCard';
 
 const FeaturedProducts = () => {
-  const featuredProducts = featuredProductsData.results;
+  const { data: featuredProductsData, isLoading } = useFeaturedProducts();
+  const { dispatch } = useContext(GlobalContext);
+  if (isLoading) {
+    return (
+      <SpinnerContainer>
+        <Spinner animation="border" variant="danger" />
+      </SpinnerContainer>
+    );
+  }
+  const handleClick = () => {
+    dispatch({ type: 'FILTER_BY_CATEGORY', payload: '' });
+  };
+
   return (
     <section>
       <SectionTitle>Featured Products</SectionTitle>
       <CardContainer>
-        {featuredProducts.map((featuredProduct) => (
+        {featuredProductsData.results.map((featuredProduct) => (
           <ProductCard
             key={featuredProduct.id}
+            url={`product/${featuredProduct.id}`}
             name={featuredProduct.data.name}
             image={featuredProduct.data.mainimage.url}
-            buttonText="Go to product"
+            buttonText="Add to cart"
+            price={featuredProduct.data.price}
+            category={featuredProduct.data.category.slug}
+            isProduct={true}
           />
         ))}
       </CardContainer>
@@ -24,7 +44,8 @@ const FeaturedProducts = () => {
         variant="danger"
         style={{ marginLeft: '15px', marginBlock: '15px' }}
         as={Link}
-        to="/product-list"
+        to="/products"
+        onClick={handleClick}
       >
         View all products
       </Button>

@@ -1,39 +1,57 @@
+import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
 import { StyledCard } from './styles/Card.styled';
 import { CardImage } from './styles/CardImage.styled';
 import { CardTitle } from './styles/CardTitle.styled';
 import { ProductCardDetails } from './styles/ProductCardDetails.styled';
-import Button from 'react-bootstrap/Button';
-import PropTypes from 'prop-types';
 
 const ProductCard = ({
+  id,
   name,
+  url,
   image,
   price,
   category,
   buttonText,
-  productListPage,
+  isProduct,
 }) => {
+  const { dispatch } = useContext(GlobalContext);
+  const handleClick = () => {
+    if (isProduct) return;
+    dispatch({ type: 'FILTER_BY_CATEGORY', payload: id });
+  };
   return (
-    <StyledCard>
-      <CardImage src={image} />
-      <CardTitle>{name}</CardTitle>
-      {productListPage && (
-        <ProductCardDetails>
-          <h4>{category}</h4>
-          <h5>$ {price}</h5>
-        </ProductCardDetails>
-      )}
-      <Button>{buttonText}</Button>
-    </StyledCard>
+    <Link
+      to={url}
+      style={{ textDecoration: 'none', color: '#fefefe' }}
+      onClick={handleClick}
+    >
+      <StyledCard>
+        <CardImage src={image} />
+        <CardTitle>{name}</CardTitle>
+        {isProduct && (
+          <ProductCardDetails>
+            <h5>{category}</h5>
+            <h6>$ {price}</h6>
+          </ProductCardDetails>
+        )}
+        <Button>{buttonText}</Button>
+      </StyledCard>
+    </Link>
   );
 };
 
 ProductCard.propTypes = {
+  id: PropTypes.string,
   name: PropTypes.string,
+  url: PropTypes.string,
   image: PropTypes.string,
   price: PropTypes.number,
   category: PropTypes.string,
   buttonText: PropTypes.string,
-  productListPage: PropTypes.bool,
+  isProduct: PropTypes.bool,
 };
 export default ProductCard;

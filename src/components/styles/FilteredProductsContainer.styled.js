@@ -5,7 +5,7 @@ export const FilteredProductsContainer = styled.main`
   margin-top: 30px;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;

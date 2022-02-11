@@ -3,10 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import SearchForm from './SearchForm';
 import logo from '../assets/shop-logo.png';
 
 const NavBar = () => {
@@ -34,15 +33,7 @@ const NavBar = () => {
               <FontAwesomeIcon icon={faShoppingCart} /> (0)
             </Button>
           </Nav>
-          <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="primary">Search</Button>
-          </Form>
+          <SearchForm />
         </Navbar.Collapse>
       </Container>
     </Navbar>

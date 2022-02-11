@@ -1,17 +1,28 @@
+import Spinner from 'react-bootstrap/Spinner';
+import { useProductCategories } from '../utils/hooks/useProductCategories';
 import ProductCard from './ProductCard';
+import { SpinnerContainer } from './styles/SpinnerContainer.styled';
 import { SectionTitle } from './styles/SectionTitle.styled';
 import { CardContainer } from './styles/CardContainer.styled';
-import productCategoriesData from '../mocks/en-us/product-categories.json';
 
 const ProductCategories = () => {
-  const productCategories = productCategoriesData.results;
+  const { data: categoriesData, isLoading } = useProductCategories();
+  if (isLoading) {
+    return (
+      <SpinnerContainer>
+        <Spinner animation="border" variant="danger" />
+      </SpinnerContainer>
+    );
+  }
   return (
     <section>
       <SectionTitle>Product Categories</SectionTitle>
       <CardContainer>
-        {productCategories.map((productCategory) => (
+        {categoriesData.results.map((productCategory) => (
           <ProductCard
             key={productCategory.id}
+            id={productCategory.id}
+            url={`/products`}
             name={productCategory.data.name}
             image={productCategory.data.main_image.url}
             buttonText="Go to category"

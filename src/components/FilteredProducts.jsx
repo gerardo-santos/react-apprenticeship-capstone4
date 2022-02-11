@@ -1,36 +1,23 @@
-import { useState } from 'react';
-import Spinner from 'react-bootstrap/Spinner';
-import Alert from 'react-bootstrap/Alert';
-import { FilteredProductsContainer } from './styles/FilteredProductsContainer.styled';
-import ProductCard from '../components/ProductCard';
 import PropTypes from 'prop-types';
 
-const FilteredProducts = ({ filteredProducts }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  setTimeout(() => {
-    setIsLoading(false);
-  }, 2000);
+import Alert from 'react-bootstrap/Alert';
+import ProductCard from '../components/ProductCard';
+import { FilteredProductsContainer } from './styles/FilteredProductsContainer.styled';
 
-  if (isLoading) {
-    return (
-      <div style={{ marginLeft: '10%', marginTop: '20%' }}>
-        <h1>Loading...</h1>;
-        <Spinner animation="border" variant="danger" />
-      </div>
-    );
-  }
+const FilteredProducts = ({ filteredProducts }) => {
   return (
     <FilteredProductsContainer>
-      {filteredProducts.length > 0 ? (
+      {filteredProducts && filteredProducts.length > 0 ? (
         filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
             name={product.data.name}
+            url={`../product/${product.id}`}
             image={product.data.mainimage.url}
             price={product.data.price}
             category={product.data.category.slug}
-            buttonText="Go to product"
-            productListPage={true}
+            buttonText="Add to cart"
+            isProduct={true}
           />
         ))
       ) : (
