@@ -35,9 +35,11 @@ const ProductList = () => {
   };
 
   const filterProducts = (activeCategoriesIds) => {
-    const newFilteredProducts = allProductsData.results.filter((product) =>
-      activeCategoriesIds.includes(product.data.category.id)
-    );
+    const newFilteredProducts =
+      allProductsData.results &&
+      allProductsData.results.filter((product) =>
+        activeCategoriesIds.includes(product.data.category.id)
+      );
     setFilteredProducts(newFilteredProducts);
   };
 

@@ -7,7 +7,7 @@ import { FilteredProductsContainer } from './styles/FilteredProductsContainer.st
 const FilteredProducts = ({ filteredProducts }) => {
   return (
     <FilteredProductsContainer>
-      {filteredProducts.length > 0 ? (
+      {filteredProducts && filteredProducts.length > 0 ? (
         filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
