@@ -16,18 +16,36 @@ const ProductCard = ({
   price,
   category,
   buttonText,
+  stock,
   isProduct,
 }) => {
-  const { dispatch } = useContext(GlobalContext);
-  const handleClick = () => {
+  const { dispatch, cart } = useContext(GlobalContext);
+  const handleCardClick = () => {
     if (isProduct) return;
     dispatch({ type: 'FILTER_BY_CATEGORY', payload: id });
+  };
+
+  const handleBtnClick = (e) => {
+    if (isProduct) {
+      e.preventDefault();
+      const newProduct = { id, name, image, price, category, stock, amount: 1 };
+      const productAlreadyInCart = cart.some((prod) => prod.id === id);
+      let newCart = [];
+      if (productAlreadyInCart) {
+        newCart = cart.map((prod) =>
+          prod.id === id ? { ...prod, amount: newProduct.amount } : prod
+        );
+      } else {
+        newCart = [...cart, newProduct];
+      }
+      dispatch({ type: 'UPDATE_CART', payload: newCart });
+    }
   };
   return (
     <Link
       to={url}
       style={{ textDecoration: 'none', color: '#fefefe' }}
-      onClick={handleClick}
+      onClick={handleCardClick}
     >
       <StyledCard>
         <CardImage src={image} />
@@ -38,7 +56,7 @@ const ProductCard = ({
             <h6>$ {price}</h6>
           </ProductCardDetails>
         )}
-        <Button>{buttonText}</Button>
+        <Button onClick={handleBtnClick}>{buttonText}</Button>
       </StyledCard>
     </Link>
   );
@@ -52,6 +70,7 @@ ProductCard.propTypes = {
   price: PropTypes.number,
   category: PropTypes.string,
   buttonText: PropTypes.string,
+  stock: PropTypes.number,
   isProduct: PropTypes.bool,
 };
 export default ProductCard;

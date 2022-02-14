@@ -30,12 +30,14 @@ const FeaturedProducts = () => {
         {featuredProductsData.results.map((featuredProduct) => (
           <ProductCard
             key={featuredProduct.id}
+            id={featuredProduct.id}
             url={`product/${featuredProduct.id}`}
             name={featuredProduct.data.name}
             image={featuredProduct.data.mainimage.url}
             buttonText="Add to cart"
             price={featuredProduct.data.price}
             category={featuredProduct.data.category.slug}
+            stock={featuredProduct.data.stock}
             isProduct={true}
           />
         ))}

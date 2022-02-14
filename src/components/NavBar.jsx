@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -6,11 +7,13 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import SearchForm from './SearchForm';
+import { GlobalContext } from '../context/GlobalContext';
 import logo from '../assets/shop-logo.png';
 
 const NavBar = () => {
+  const { cart } = useContext(GlobalContext);
   return (
-    <Navbar bg="danger" expand="lg" variant="dark">
+    <Navbar bg="danger" expand="lg" variant="dark" fixed="top">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -29,8 +32,8 @@ const NavBar = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Button as={Link} to="/shopping-cart">
-              <FontAwesomeIcon icon={faShoppingCart} /> (0)
+            <Button as={Link} to="/cart">
+              <FontAwesomeIcon icon={faShoppingCart} /> ({cart.length})
             </Button>
           </Nav>
           <SearchForm />
