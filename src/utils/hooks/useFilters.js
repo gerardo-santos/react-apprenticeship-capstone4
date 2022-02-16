@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, createSearchParams } from 'react-router-dom';
+import { API_BASE_URL } from '../constants';
+import { useLatestAPI } from './useLatestAPI';
 import { useAllProducts } from './useAllProducts';
 import { useProductCategories } from './useProductCategories';
 
 export const useFilters = (selectedCategory, location) => {
   const navigate = useNavigate();
+  const { ref: apiRef, isLoading: isApiMetadataLoading } = useLatestAPI();
 
   const { data: allProductsData, isLoading: productsAreLoading } =
     useAllProducts();
@@ -24,13 +27,29 @@ export const useFilters = (selectedCategory, location) => {
     return activeCategoriesIds;
   };
 
-  const filterProducts = (activeCategoriesIds) => {
-    const newFilteredProducts =
-      allProductsData.results &&
-      allProductsData.results.filter((product) =>
-        activeCategoriesIds.includes(product.data.category.id)
+  const filterProducts = async (activeCategoriesIds) => {
+    if (!apiRef || isApiMetadataLoading) {
+      return () => {};
+    }
+
+    const controller = new AbortController();
+
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/documents/search?ref=${apiRef}&q=${encodeURIComponent(
+          `[[at(document.type, "product")][any(my.product.category, ${JSON.stringify(
+            activeCategoriesIds
+          )})]]`
+        )}&lang=en-us&pageSize=16`,
+        {
+          signal: controller.signal,
+        }
       );
-    setFilteredProducts(newFilteredProducts);
+      const data = await response.json();
+      setFilteredProducts(data.results);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const toggleCategory = (id) => {
@@ -57,7 +76,6 @@ export const useFilters = (selectedCategory, location) => {
       const path = location.pathname.split('/');
       if (path.length !== 3) {
         navigate('/product');
-        return;
       }
       return;
     }
