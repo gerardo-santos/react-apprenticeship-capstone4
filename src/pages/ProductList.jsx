@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import Spinner from 'react-bootstrap/Spinner';
 import { Outlet, useLocation } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
 import { GlobalContext } from '../context/GlobalContext';
 import FilteredProducts from '../components/FilteredProducts';
 import ProductFilters from '../components/ProductFilters';

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { GlobalContext } from '../context/GlobalContext';
 import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
+import { GlobalContext } from '../context/GlobalContext';
 import { useSearchProducts } from '../utils/hooks/useSearchProducts';
 import ProductCard from '../components/ProductCard';
 import { CardContainer } from '../components/styles/CardContainer.styled';

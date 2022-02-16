@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
+import Button from 'react-bootstrap/Button';
 import { GlobalContext } from '../context/GlobalContext';
 import { StyledCard } from './styles/Card.styled';
 import { CardImage } from './styles/CardImage.styled';

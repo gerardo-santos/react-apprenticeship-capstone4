@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
-import { GlobalContext } from '../context/GlobalContext';
 import { Button } from 'react-bootstrap';
+import { GlobalContext } from '../context/GlobalContext';
 import { CartItemContainer } from './styles/CartItemContainer.styled';
 import { CartItemInfoContainer } from './styles/CartItemInfoContainer.styled';
 

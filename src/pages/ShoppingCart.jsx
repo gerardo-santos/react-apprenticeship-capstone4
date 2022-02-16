@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { GlobalContext } from '../context/GlobalContext';
 import { Link } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+import { GlobalContext } from '../context/GlobalContext';
 import CartItem from '../components/CartItem';
 import { PageContainer } from '../components/styles/PageContainer.styled';
 import { SectionTitle } from '../components/styles/SectionTitle.styled';
