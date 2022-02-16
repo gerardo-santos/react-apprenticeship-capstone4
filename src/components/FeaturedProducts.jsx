@@ -1,8 +1,8 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import { useContext } from 'react';
-import { GlobalContext } from '../context/GlobalContext';
 import Spinner from 'react-bootstrap/Spinner';
+import { GlobalContext } from '../context/GlobalContext';
 import ProductCard from './ProductCard';
 import { useFeaturedProducts } from '../utils/hooks/useFeaturedProducts';
 import { SpinnerContainer } from './styles/SpinnerContainer.styled';
@@ -46,7 +46,7 @@ const FeaturedProducts = () => {
         variant="danger"
         style={{ marginLeft: '15px', marginBlock: '15px' }}
         as={Link}
-        to="/products"
+        to="/product"
         onClick={handleClick}
       >
         View all products

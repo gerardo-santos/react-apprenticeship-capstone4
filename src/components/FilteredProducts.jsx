@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import Alert from 'react-bootstrap/Alert';
 import ProductCard from '../components/ProductCard';
 import { FilteredProductsContainer } from './styles/FilteredProductsContainer.styled';
@@ -13,7 +12,7 @@ const FilteredProducts = ({ filteredProducts }) => {
             key={product.id}
             id={product.id}
             name={product.data.name}
-            url={`../product/${product.id}`}
+            url={`/product/${product.id}`}
             image={product.data.mainimage.url}
             price={product.data.price}
             category={product.data.category.slug}

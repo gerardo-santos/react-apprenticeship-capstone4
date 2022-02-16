@@ -22,7 +22,7 @@ const ProductCategories = () => {
           <ProductCard
             key={productCategory.id}
             id={productCategory.id}
-            url={`/products`}
+            url="/product"
             name={productCategory.data.name}
             image={productCategory.data.main_image.url}
             buttonText="Go to category"

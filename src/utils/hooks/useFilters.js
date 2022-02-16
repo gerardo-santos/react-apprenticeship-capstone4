@@ -3,7 +3,7 @@ import { useNavigate, createSearchParams } from 'react-router-dom';
 import { useAllProducts } from './useAllProducts';
 import { useProductCategories } from './useProductCategories';
 
-export const useFilters = (selectedCategory) => {
+export const useFilters = (selectedCategory, location) => {
   const navigate = useNavigate();
 
   const { data: allProductsData, isLoading: productsAreLoading } =
@@ -54,13 +54,17 @@ export const useFilters = (selectedCategory) => {
       setFilteredProducts(
         allProductsData.results ? [...allProductsData.results] : []
       );
-      navigate('/products');
+      const path = location.pathname.split('/');
+      if (path.length !== 3) {
+        navigate('/product');
+        return;
+      }
       return;
     }
     filterProducts(activeCategoriesIds);
     const params = { category: activeCategoriesIds };
     navigate({
-      pathname: '/products',
+      pathname: '/product',
       search: `?${createSearchParams(params)}`,
     });
   }, [productCategories]);

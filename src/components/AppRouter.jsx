@@ -10,11 +10,13 @@ const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="products" element={<ProductList />} />
-      <Route path="product/:id" element={<ProductDetail />} />
       <Route path="search" element={<SearchResults />} />
       <Route path="cart" element={<ShoppingCart />} />
       <Route path="checkout" element={<Checkout />} />
+      <Route path="product">
+        <Route index element={<ProductList />} />
+        <Route path=":id" element={<ProductDetail />} />
+      </Route>
     </Routes>
   );
 };

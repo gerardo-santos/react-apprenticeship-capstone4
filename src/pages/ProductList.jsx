@@ -1,21 +1,20 @@
 import { useContext } from 'react';
-// import { useNavigate, createSearchParams } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
-// import { useProductCategories } from '../utils/hooks/useProductCategories';
-// import { useAllProducts } from '../utils/hooks/useAllProducts';
+import { Outlet, useLocation } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalContext';
 import FilteredProducts from '../components/FilteredProducts';
 import ProductFilters from '../components/ProductFilters';
 import PaginationButtons from '../components/PaginationButtons';
+import { useFilters } from '../utils/hooks/useFilters';
 import { PageContainer } from '../components/styles/PageContainer.styled';
 import { SectionTitle } from '../components/styles/SectionTitle.styled';
 import { ProductListSection } from '../components/styles/ProductListSection.styled';
 import { SpinnerContainer } from '../components/styles/SpinnerContainer.styled';
-import { useFilters } from '../utils/hooks/useFilters';
 
 const ProductList = () => {
   const { selectedCategory } = useContext(GlobalContext);
-  const filtersData = useFilters(selectedCategory);
+  const location = useLocation();
+  const filtersData = useFilters(selectedCategory, location);
 
   if (filtersData.productsAreLoading || filtersData.categoriesAreLoading) {
     return (
@@ -37,6 +36,7 @@ const ProductList = () => {
         <FilteredProducts filteredProducts={filtersData.filteredProducts} />
         <PaginationButtons />
       </ProductListSection>
+      <Outlet />
     </PageContainer>
   );
 };
