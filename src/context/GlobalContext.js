@@ -1,6 +1,6 @@
 import { createContext, useReducer } from 'react';
-import { globalReducer } from './GlobalReducer';
 import PropTypes from 'prop-types';
+import { globalReducer } from './GlobalReducer';
 export const GlobalContext = createContext();
 
 const initialDefaultState = {

@@ -6,6 +6,8 @@ export const globalReducer = (state, action) => {
       return { ...state, search: action.payload };
     case 'FILTER_BY_CATEGORY':
       return { ...state, selectedCategory: action.payload };
+    case 'UPDATE_CART':
+      return { ...state, cart: action.payload };
     default:
       return state;
   }
