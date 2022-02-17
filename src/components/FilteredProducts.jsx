@@ -17,6 +17,7 @@ const FilteredProducts = ({ filteredProducts }) => {
             price={product.data.price}
             category={product.data.category.slug}
             buttonText="Add to cart"
+            stock={product.data.stock}
             isProduct={true}
           />
         ))
