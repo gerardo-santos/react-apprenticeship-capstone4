@@ -20,7 +20,7 @@ describe('Checkout', () => {
       </GlobalContext.Provider>
     );
 
-    expect(screen.getByRole('heading')).toBeInTheDocument();
-    expect(screen.getByRole('heading')).toHaveTextContent('Checkout');
+    const mainHeading = screen.getByRole('heading', { level: 2 });
+    expect(mainHeading).toHaveTextContent('Checkout');
   });
 });
