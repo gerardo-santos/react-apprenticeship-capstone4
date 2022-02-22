@@ -27,6 +27,7 @@ const SearchResults = () => {
           searchData.results.map((searchProduct) => (
             <ProductCard
               key={searchProduct.id}
+              id={searchProduct.id}
               name={searchProduct.data.name}
               url={`../product/${searchProduct.id}`}
               image={searchProduct.data.mainimage.url}
