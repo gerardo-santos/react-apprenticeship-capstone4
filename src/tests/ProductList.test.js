@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalContext';
-import Checkout from '../pages/Checkout';
+import ProductList from '../pages/ProductList';
 
-describe('Checkout', () => {
+describe('ProductList', () => {
   const initialDefaultState = {
     query: '',
     search: '',
@@ -11,16 +11,13 @@ describe('Checkout', () => {
     selectedCategory: '',
   };
 
-  test('renders the Checkout component', () => {
+  test('renders the ProductList component', () => {
     render(
       <GlobalContext.Provider value={initialDefaultState}>
         <BrowserRouter>
-          <Checkout />
+          <ProductList />
         </BrowserRouter>
       </GlobalContext.Provider>
     );
-
-    const mainHeading = screen.getByRole('heading', { level: 2 });
-    expect(mainHeading).toHaveTextContent('Checkout');
   });
 });
